@@ -79,12 +79,11 @@ mkdir -p $OUTPUT_DIR
 
 IMAGE="ghcr.io/sorbet-multiarch/sorbet-build-image:latest-${CURRENT_ARCH}"
 docker run --rm \
-  --platform "linux/${CURRENT_ARCH}" \
   -v $VOL_BINARIES:/root/.bazel_binaries \
   -v $VOL_CACHE:/usr/local/var/bazelcache \
-  -v "./sorbet":/app \
-  -v "./${OUTPUT_DIR}":/app/output \
-  -v "./scripts":/app/scripts \
+  -v "${DIR}/sorbet":/app \
+  -v "${DIR}/${OUTPUT_DIR}":/app/output \
+  -v "${DIR}/scripts":/app/scripts \
   --workdir /app \
   --entrypoint /bin/bash \
   "$IMAGE" scripts/build-static-gem.sh
