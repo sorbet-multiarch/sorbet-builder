@@ -10,6 +10,9 @@ jobs:
       - run:
           name: Build sorbet-static gem
           command: ./build.sh
+      - run:
+          name: Pubish sorbet-static to Gemfury
+          command: ./publish.sh
 workflows:
   build:
     jobs:
