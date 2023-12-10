@@ -86,4 +86,5 @@ docker run --rm \
   -v "${DIR}/${OUTPUT_DIR}":/app/output \
   -v "${DIR}/scripts":/scripts \
   --workdir /app \
+  --entrypoint /bin/bash \
   "$IMAGE" /scripts/build-static-gem.sh
