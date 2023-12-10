@@ -79,6 +79,7 @@ mkdir -p $OUTPUT_DIR
 
 IMAGE="ghcr.io/sorbet-multiarch/sorbet-build-image:latest-${CURRENT_ARCH}"
 docker run --rm \
+  --platform "linux/${CURRENT_ARCH}" \
   -v $VOL_BINARIES:/root/.bazel_binaries \
   -v $VOL_CACHE:/usr/local/var/bazelcache \
   -v "${DIR}/sorbet":/app \
