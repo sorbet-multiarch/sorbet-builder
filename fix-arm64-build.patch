@@ -1,0 +1,15 @@
+diff --git a/.bazelrc b/.bazelrc
+index 0a66fb710..0be8127cb 100644
+--- a/.bazelrc
++++ b/.bazelrc
+@@ -116,8 +116,8 @@ build:release-linux --config=lto-linux --config=release-common
+ #
+ # At Stripe: developer laptops run skylake, devboxes run skylake-avx512
+ # however some AWS instances in our fleet still run Sandy Bridge (Skylake predecessor), as of 2018.
+-build:release-linux           --copt=-march=sandybridge
+-build:release-sanitized-linux --copt=-march=sandybridge
++build:release-linux
++build:release-sanitized-linux
+
+ build:release-mac --config=release-common --platforms=@//tools/platforms:darwin_x86_64
+
