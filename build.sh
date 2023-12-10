@@ -5,7 +5,7 @@
 # usage: ./build.sh
 # usage: SORBET_VERSION=0.5.10983 ./build.sh
 
-set -eou pipefail
+set -eoux pipefail
 
 function current_architecture() {
   case "$(uname -m)" in
