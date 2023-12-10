@@ -82,9 +82,9 @@ docker run --rm \
   --platform "linux/${CURRENT_ARCH}" \
   -v $VOL_BINARIES:/root/.bazel_binaries \
   -v $VOL_CACHE:/usr/local/var/bazelcache \
-  -v "${DIR}/sorbet":/app \
-  -v "${DIR}/${OUTPUT_DIR}":/app/output \
-  -v "${DIR}/scripts":/app/scripts \
+  -v "./sorbet":/app \
+  -v "./${OUTPUT_DIR}":/app/output \
+  -v "./scripts":/app/scripts \
   --workdir /app \
   --entrypoint /bin/bash \
   "$IMAGE" scripts/build-static-gem.sh
