@@ -84,7 +84,7 @@ docker run --rm \
   -v $VOL_CACHE:/usr/local/var/bazelcache \
   -v "${DIR}/sorbet":/app \
   -v "${DIR}/${OUTPUT_DIR}":/app/output \
-  -v "${DIR}/scripts":/scripts \
+  -v "${DIR}/scripts":/app/scripts \
   --workdir /app \
   --entrypoint /bin/bash \
-  "$IMAGE" /scripts/build-static-gem.sh
+  "$IMAGE" scripts/build-static-gem.sh
