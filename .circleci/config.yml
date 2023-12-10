@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: cimg/base:current
-    resource_class: arm.large
+    resource_class: large
     steps:
       - checkout
       - setup_remote_docker:
