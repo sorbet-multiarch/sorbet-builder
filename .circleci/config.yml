@@ -42,7 +42,7 @@ workflows:
               value: << pipeline.git.branch >>
     jobs:
       - build
-  build-any-publish:
+  build-and-publish:
     when:
       and:
         - equal: [ << pipeline.git.branch >>, main ]
