@@ -1,10 +1,18 @@
 version: 2.1
+
+parameters:
+  sorbet-version:
+    type: string
+    default: ""
+
 jobs:
   build:
     machine:
       image: ubuntu-2004:current
       docker_layer_caching: true
     resource_class: arm.large
+    environment:
+      SORBET_VERSION: << pipeline.parameters.sorbet-version >>
     steps:
       - checkout
       - run: &build
@@ -32,9 +40,22 @@ workflows:
               value: << pipeline.git.branch >>
     jobs:
       - build
-  build-any-publish:
+
+  build-and-publish:
     when:
       and:
         - equal: [ << pipeline.git.branch >>, main ]
+    jobs:
+      - build-and-publish
+
+  nightly-latest-publish:
+    triggers:
+      - schedule:
+          # midnight PT
+          cron: "0 8 * * *"
+          filters:
+            branches:
+              only:
+                - main
     jobs:
       - build-and-publish
