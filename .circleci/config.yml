@@ -15,7 +15,7 @@ jobs:
       - checkout
       - run: &build
           name: Build sorbet-static gem
-          command: SORBET_VERSION='{{ parameters.sorbet-version }}' ./build.sh
+          command: SORBET_VERSION='<< parameters.sorbet-version >>' ./build.sh
   build-and-publish:
     machine:
       image: ubuntu-2004:current
