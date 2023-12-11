@@ -1,6 +1,8 @@
 # sorbet-builder
 Build the Sorbet Ruby gem for the linux/arm64 platform.
 
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/sorbet-multiarch/sorbet-builder/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/sorbet-multiarch/sorbet-builder/tree/main)
+
 ## Usage
 There are a couple of ways to use this repository: the gems published to Gemfury, or directly building your own.
 
