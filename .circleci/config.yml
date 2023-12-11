@@ -11,11 +11,13 @@ jobs:
       image: ubuntu-2004:current
       docker_layer_caching: true
     resource_class: arm.large
+    environment:
+      SORBET_VERSION: << pipeline.parameters.sorbet-version >>
     steps:
       - checkout
       - run: &build
           name: Build sorbet-static gem
-          command: SORBET_VERSION='<< parameters.sorbet-version >>' ./build.sh
+          command: ./build.sh
   build-and-publish:
     machine:
       image: ubuntu-2004:current
