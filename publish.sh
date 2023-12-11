@@ -13,7 +13,7 @@ function mirror_to_gemfury() {
   GEM_FILENAME=$1
 
   TMPDIR=$(mktemp -d)
-  OUTPUT_PATH="${TMPDIR}/1${GEM_FILENAME}"
+  OUTPUT_PATH="${TMPDIR}/${GEM_FILENAME}"
 
   echo "Mirroring $GEM_FILENAME"
   curl \
