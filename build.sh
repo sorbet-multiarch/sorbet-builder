@@ -46,6 +46,7 @@ pushd sorbet
 
 # (Optionally) build a specific version
 if [ "${SORBET_VERSION:-}" != "" ]; then
+  echo "Building Sorbet version ${SORBET_VERSION}"
   echo "Finding tag for $SORBET_VERSION"
   tag=$(git tag -l "${SORBET_VERSION}.*")
   commit_sha=$(git rev-list -n 1 "$tag")
@@ -56,6 +57,8 @@ if [ "${SORBET_VERSION:-}" != "" ]; then
   # point master at $commit_sha
   git branch -D master
   git checkout -b master
+else
+  echo "Building latest master Sorbet"
 fi
 
 if [ "${CURRENT_ARCH}" == "arm64" ]; then
