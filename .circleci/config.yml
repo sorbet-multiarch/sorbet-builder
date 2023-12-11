@@ -1,4 +1,10 @@
 version: 2.1
+
+parameters:
+  sorbet-version:
+    type: string
+    default: ""
+
 jobs:
   build:
     machine:
@@ -7,6 +13,9 @@ jobs:
     resource_class: arm.large
     steps:
       - checkout
+      - run: &version
+          name: Set Sorbet version
+          command: export SORBET_VERSION='${{ parameters.sorbet-version }}'
       - run: &build
           name: Build sorbet-static gem
           command: ./build.sh
@@ -17,6 +26,7 @@ jobs:
     resource_class: arm.large
     steps:
       - checkout
+      - run: *version
       - run: *build
       - run:
           name: Pubish sorbet-static to Gemfury
