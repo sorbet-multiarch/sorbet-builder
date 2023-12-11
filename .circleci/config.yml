@@ -23,6 +23,8 @@ jobs:
       image: ubuntu-2004:current
       docker_layer_caching: true
     resource_class: arm.large
+    environment:
+      SORBET_VERSION: << pipeline.parameters.sorbet-version >>
     steps:
       - checkout
       - run: *build
