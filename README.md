@@ -11,7 +11,7 @@ This repository is used to build and publish gems to Gemfury.
 Just change your `Gemfile` like so:
 ```
 source 'https://gem.fury.io/sorbet-multiarch/' do
-  gem 'sorbet-static'
+  gem 'sorbet-static', :group => :development
   gem 'sorbet'
 end
 ```
@@ -19,7 +19,7 @@ end
 Specific versions can be used too (when published):
 ```
 source 'https://gem.fury.io/sorbet-multiarch/' do
-  gem 'sorbet-static', '0.5.11150'
+  gem 'sorbet-static', '0.5.11150', :group => :development
   gem 'sorbet', '0.5.11150'
 end
 ```
