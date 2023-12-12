@@ -16,10 +16,16 @@ function mirror_to_gemfury() {
   OUTPUT_PATH="${TMPDIR}/${GEM_FILENAME}"
 
   echo "Mirroring $GEM_FILENAME"
-  curl \
+  CODE=$(curl \
     --silent \
+    --write-out '%{http_code}' \
     --output "$OUTPUT_PATH" \
-    https://rubygems.org/downloads/$GEM_FILENAME
+    https://rubygems.org/downloads/$GEM_FILENAME)
+
+  if [[ $CODE != 200 ]]; then
+    echo "Error downloading ${GEM_FILENAME} from rubygems.org: status code ${CODE}"
+    exit 1
+  fi
 
   curl -F package=@$OUTPUT_PATH https://${GEMFURY_TOKEN}@push.fury.io/${GEMFURY_USERNAME}/
 }
