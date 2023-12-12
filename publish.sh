@@ -37,7 +37,7 @@ function mirror_static_darwin_to_gemfury() {
   PATCH=$(echo $VERSION | cut -d '.' -f 3)
 
   # Switched a single macOS release: https://github.com/sorbet/sorbet/pull/7292
-  if [ $PATCH >= 11010 ]; then
+  if [ $PATCH -ge 11010 ]; then
     mirror_to_gemfury "sorbet-static-${VERSION}-universal-darwin.gem"
   else
     # The Darwin versions for recent-ish Sorbet builds
