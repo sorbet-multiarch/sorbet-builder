@@ -7,7 +7,7 @@
 
 set -eou pipefail
 
-GEMFURY_USERNAME=sorbet-multiarch
+GEMFURY_USERNAME=${GEMFURY_USERNAME:-sorbet-multiarch}
 
 function mirror_to_gemfury() {
   GEM_FILENAME=$1
@@ -24,15 +24,32 @@ function mirror_to_gemfury() {
   curl -F package=@$OUTPUT_PATH https://${GEMFURY_TOKEN}@push.fury.io/${GEMFURY_USERNAME}/
 }
 
+function mirror_static_darwin_to_gemfury() {
+  VERSION=$1
+
+  MINOR=$(echo $VERSION | cut -d '.' -f 2)
+  PATCH=$(echo $VERSION | cut -d '.' -f 3)
+
+  # Switched a single macOS release: https://github.com/sorbet/sorbet/pull/7292
+  if [ $PATCH >= 11010 ]; then
+    mirror_to_gemfury "sorbet-static-${VERSION}-universal-darwin.gem"
+  else
+    # The Darwin versions for recent-ish Sorbet builds
+    for DARWIN_VERSION in 14 15 16 17 18 19 20 21 22; do
+      mirror_to_gemfury "sorbet-static-${VERSION}-universal-darwin-${DARWIN_VERSION}.gem"
+    done
+  fi
+}
+
 for GEM in output/*.gem; do
   VERSION=$(echo $GEM | sed -e 's/output\///' -e 's/sorbet-static-//' -e 's/-aarch64-linux.gem//')
 
   echo "Mirroring Sorbet gems for ${VERSION} to Gemfury"
 
-  # Mirror the platform+architecture specific static gems
+  # Mirror the static binary gems
   mirror_to_gemfury "sorbet-static-${VERSION}-x86_64-linux.gem"
   mirror_to_gemfury "sorbet-static-${VERSION}-java.gem"
-  mirror_to_gemfury "sorbet-static-${VERSION}-universal-darwin.gem"
+  mirror_static_darwin_to_gemfury $VERSION
 
   # Mirror remaining Sorbet gems
   mirror_to_gemfury "sorbet-${VERSION}.gem"
