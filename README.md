@@ -4,7 +4,7 @@ Build the Sorbet Ruby gem for the linux/arm64 platform.
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/sorbet-multiarch/sorbet-builder/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/sorbet-multiarch/sorbet-builder/tree/main)
 
 > [!WARNING]
-> This project is no longer active. Please use rubygems.org for Sorbet gems.
+> This project is no longer active. Please use [rubygems.org](https://rubygems.org/gems/sorbet) for Sorbet gems.
 
 > [!IMPORTANT]
 > Starting with [0.5.11361](https://rubygems.org/gems/sorbet-static/versions/0.5.11361-aarch64-linux), Sorbet now includes [builds for aarch64-linux](https://github.com/sorbet/sorbet/pull/7718)!
