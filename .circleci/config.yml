@@ -49,15 +49,3 @@ workflows:
         - equal: [ << pipeline.git.branch >>, main ]
     jobs:
       - build-and-publish
-
-  nightly-latest-publish:
-    triggers:
-      - schedule:
-          # midnight PT
-          cron: "0 8 * * *"
-          filters:
-            branches:
-              only:
-                - main
-    jobs:
-      - build-and-publish
